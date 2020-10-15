@@ -8610,8 +8610,8 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-"react-error-catcher@file:../":
-  version "1.0.2"
+"react-error-catcher@file:..":
+  version "1.0.0"
   dependencies:
     "@testing-library/jest-dom" "^4.2.4"
     "@testing-library/react" "^9.3.2"
