@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import ErrorCatcher from 'react-error-catcher'
-
-console.log(ErrorCatcher)
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ErrorCatcher>
-      <App />
-    </ErrorCatcher>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 )
