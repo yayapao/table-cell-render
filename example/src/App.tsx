@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Space, Button } from 'antd'
+import renderCell from './TableCellRender'
 import './App.css'
 
 const data = [
@@ -8,21 +9,17 @@ const data = [
     name: 'John Brown',
     age: 32,
     address: 'New York No. 1 Lake Park',
+    remark: '',
     tags: ['nice', 'developer'],
   },
   {
     key: '2',
-    name: 'Jim Green',
+    name: '',
     age: 42,
     address: 'London No. 1 Lake Park',
+    remark:
+      'it creates a new name to refer to that type. Aliasing a primitive is not terribly useful,',
     tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
   },
 ]
 
@@ -32,25 +29,55 @@ function App() {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+      width: 120,
+      render: (value: any) => {
+        return renderCell('string', value)
+      },
     },
     {
       title: 'Age',
       dataIndex: 'age',
+      width: 120,
       key: 'age',
     },
     {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
+      width: 120,
+      render: (value: any) => {
+        return renderCell('code', value)
+      },
+    },
+    {
+      title: 'Remark',
+      key: 'remark',
+      dataIndex: 'remark',
+      width: 200,
+      render: (value: any) => {
+        return renderCell(
+          'string',
+          value,
+          {},
+          {
+            callback: (data) => {
+              console.log(data)
+            },
+          }
+        )
+      },
     },
     {
       title: 'Tags',
       key: 'tags',
+      width: 1200,
       dataIndex: 'tags',
     },
     {
       title: 'Action',
       key: 'action',
+      fixed: 'right' as 'right',
+      width: 160,
       render: (text: any, record: any) => {
         console.log(text)
         console.log(record)
@@ -69,7 +96,7 @@ function App() {
   ]
   return (
     <div className="App" style={{ padding: '50px' }}>
-      <Table columns={columns} dataSource={data} />
+      <Table scroll={{ x: 1500}} columns={columns} dataSource={data} />
     </div>
   )
 }
