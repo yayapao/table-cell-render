@@ -1,53 +1,60 @@
 'use strict';
 
 var React = require('react');
+var antd = require('antd');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
 
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
+  if (!css || typeof document === 'undefined') { return; }
 
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
 
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
 }
 
-var NPMTemplate = /** @class */ (function (_super) {
-    __extends(NPMTemplate, _super);
-    function NPMTemplate(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {
-            name: "hello world"
-        };
-        return _this;
-    }
-    NPMTemplate.prototype.render = function () {
-        return React__default['default'].createElement("div", null, this.props.name);
-    };
-    return NPMTemplate;
-}(React__default['default'].Component));
+var css_248z = "button.tcr-colla-button {\n  width: 100%;\n  padding: 0;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-break: keep-all;\n  user-select: none;\n  cursor: pointer;\n}\n\n.tcr-colla-string {\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-break: keep-all;\n  width: 100%;\n  cursor: default;\n}\n\n.tcr-code-pre {\n  margin-bottom: 0;\n}";
+styleInject(css_248z);
 
-module.exports = NPMTemplate;
+var initConfig = {};
+function renderCell(type, data, style, config) {
+    if (type === void 0) { type = 'string'; }
+    if (data === void 0) { data = 'TableCellRender'; }
+    if (style === void 0) { style = {}; }
+    if (config === void 0) { config = {}; }
+    var callback = Object.assign({}, initConfig, config).callback;
+    switch (type) {
+        case 'code': {
+            return (React__default['default'].createElement("pre", { className: "tcr-code-pre", style: style },
+                React__default['default'].createElement("code", null, data)));
+        }
+        case 'string': {
+            return data && String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
+                    callback();
+                } }, data)) : (React__default['default'].createElement("span", { className: "tcr-colla-string", style: style }, data)))) : ('-');
+        }
+    }
+}
+
+module.exports = renderCell;

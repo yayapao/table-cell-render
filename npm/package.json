@@ -1,16 +1,20 @@
 {
-  "name": "npm-template",
-  "version": "1.0.0",
-  "description": "make some descriptions here!",
+  "name": "cell-render",
+  "version": "1.0.2",
+  "description": "React table-cell-render tools based on antd!",
   "main": "index.js",
   "types": "index.d.ts",
   "keywords": [
-    "[\"react\"",
-    "\"error\"",
-    "\"catch\"]"
+    "react",
+    "render",
+    "cell",
+    "antd"
   ],
   "author": "Y-lonelY",
   "license": "MIT",
+  "peerDependencies": {
+    "antd": "4.x"
+  },
   "dependencies": {
     "@types/react-dom": "^16.9.0",
     "typescript": "~3.7.2"

@@ -1,20 +1,49 @@
-// this is the usage with Typescript
-// you can config the main in package.json to compile current file🍄
-import React from 'react'
-import { NPMTemplateProps } from '../../index.d'
+import React, { CSSProperties } from 'react'
+import { Tooltip, Button } from 'antd'
+import { Types, Config } from '../../index.d'
+import './style.css'
 
-export default class NPMTemplate extends React.Component<
-  NPMTemplateProps,
-  any
-> {
-  constructor(props: NPMTemplateProps) {
-    super(props)
-    this.state = {
-      name: "hello world"
+const initConfig = {}
+
+export default function renderCell(
+  type: keyof typeof Types = 'string',
+  data: any = 'TableCellRender',
+  style: CSSProperties = {},
+  config: Config = {}
+) {
+  const { callback } = Object.assign({}, initConfig, config)
+  switch (type) {
+    case 'code': {
+      return (
+        <pre className="tcr-code-pre" style={style}>
+          <code>{data}</code>
+        </pre>
+      )
+    }
+    case 'string': {
+      return data && String(data).length > 0 ? (
+        <Tooltip title={data} placement="topLeft">
+          {callback ? (
+            <Button
+              className="tcr-colla-button"
+              style={style}
+              type="link"
+              onClick={() => {
+                callback()
+              }}
+            >
+              {data}
+            </Button>
+          ) : (
+            <span className="tcr-colla-string" style={style}>
+              {data}
+            </span>
+          )}
+        </Tooltip>
+      ) : (
+        '-'
+      )
     }
   }
-
-  render() {
-    return <div>{this.props.name}</div>
-  }
 }
+

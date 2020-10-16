@@ -11,9 +11,9 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "antd": "^4.7.0",
+    "cell-render": "file:../npm",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-error-catcher": "file:../",
     "react-scripts": "3.4.3",
     "typescript": "~3.7.2"
   },

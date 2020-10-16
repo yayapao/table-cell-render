@@ -1,0 +1,25 @@
+button.tcr-colla-button {
+  width: 100%;
+  padding: 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  user-select: none;
+  cursor: pointer;
+}
+
+.tcr-colla-string {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  width: 100%;
+  cursor: default;
+}
+
+.tcr-code-pre {
+  margin-bottom: 0;
+}

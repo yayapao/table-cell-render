@@ -1,6 +1,9 @@
 import React from 'react'
 import { Table, Space, Button } from 'antd'
-import renderCell from './TableCellRender'
+// develop
+// import renderCell from './TableCellRender'
+// local path
+import renderCell from 'cell-render'
 import './App.css'
 
 const data = [
@@ -44,7 +47,7 @@ function App() {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
-      width: 120,
+      width: 400,
       render: (value: any) => {
         return renderCell('code', value)
       },

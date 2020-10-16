@@ -1,10 +1,21 @@
 import React from 'react'
 
-export interface NPMTemplateProps extends React.Props<NPMTemplate> {
-  name: string
+export enum Types {
+  code,
+  string
 }
 
+export interface Config {
+  callback?: (value?: any) => void
+}
 
-declare class NPMTemplate extends React.Component<NPMTemplateProps, any> {}
+export interface RenderCellParams {
+  type: keyof typeof Types
+  data: any
+  style: React.CSSProperties
+  config: Config
+}
 
-export default NPMTemplate
+declare function renderCell (...RenderCellParams): React.ReactNode
+
+export default renderCell
