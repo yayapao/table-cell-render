@@ -1,6 +1,7 @@
 import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
+import postcss from 'rollup-plugin-postcss'
 
 const inputPath = {
   js: 'src/index.js',
@@ -14,6 +15,6 @@ export default {
     format: 'cjs',
     exports: "auto"
   },
-  plugins: [typescript(), resolve(), commonjs()],
-  external: ["react", "react-dom"]
+  plugins: [typescript(), resolve(), commonjs(), postcss()],
+  external: ["react", "react-dom", "antd"]
 }

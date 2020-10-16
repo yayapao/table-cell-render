@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # app version
-version="0.0.1"
-app="npm-template"
+version="1.0.0"
+app="cell-render"
 
 echo "hello"
 
 function build() {
-  echo ">> The current version of $app is $version"
+  echo ">> The current version of $app is $version\n"
   cp index.js npm/index.js
   cp index.d.ts npm/index.d.ts
 }
