@@ -13,11 +13,66 @@ This project is generated from [npm-template](https://github.com/Y-lonelY/npm-te
 
 ## Usage
 
-1. do `npm install` to import some dependences
-2. develop under `src/` directory（or you can modify `rollup.config.js` -> `input` to change the rule）
-3. do `npm run build` to generate `index.js` on root，the publish it to the NPM platform
+Here's a quick demostration:
+
+```tsx
+import renderCell from 'cell-render'
+
+function App() {
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      width: 120,
+      render: (value: any) => {
+        return renderCell('string', value)
+      },
+    },
+    ...
+  ]
+  return (
+    <div className="App" style={{ padding: '50px' }}>
+      <Table scroll={{ x: 1500}} columns={columns} dataSource={data} />
+    </div>
+  )
+}
+
+export default App
+```
+
 
 ## API
+
+Here, here✨
+
+Cell-Render can greatly easy to render table cell(emmm, mostly used in the scene), but you can also use it to render something else.
+
+We can easily use it like this:
+
+```js
+const tpl = renderCell("string", value, {width: '20px'}, { callback: () => { console.log("hello") }})
+```
+
+`renderCell` can accept four params:
+- `type`: define which template to return
+- `value`: something to be rendered
+- `style`: define the element inner style
+- `config`
+
+### string
+
+Cell Render support auto handle strings in some ways!
+
+You can use like this: `const tpl = renderCell('string', value)` 
+
+- when the value is nullable(`null` or `undefined`), it will return `-`
+- if value.length is greater then the block's width, it will use `text-overflow: ellipisis;`
+
+And if you want to add some click events, the add `{ callback: () => {} }`, it will render with  `antd.Button` and `antd.Tooltip`
+
+### code
+
 
 
 
