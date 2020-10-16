@@ -60,8 +60,8 @@ function App() {
           value,
           {},
           {
-            callback: (data) => {
-              console.log(data)
+            callback: () => {
+              console.log(value)
             },
           }
         )
@@ -79,8 +79,6 @@ function App() {
       fixed: 'right' as 'right',
       width: 160,
       render: (text: any, record: any) => {
-        console.log(text)
-        console.log(record)
         return (
           <Space>
             <Button type="link" size="small">

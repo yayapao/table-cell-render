@@ -29,7 +29,7 @@ export default function renderCell(
               style={style}
               type="link"
               onClick={() => {
-                callback(data)
+                callback()
               }}
             >
               {data}

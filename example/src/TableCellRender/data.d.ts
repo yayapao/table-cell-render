@@ -4,6 +4,6 @@ export enum Types {
 }
 
 export interface Config {
-  callback?: (value: any) => void
+  callback?: (value?: any) => void
 }
 
