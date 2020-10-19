@@ -69,7 +69,7 @@ function renderCell(type, data, style, config) {
     switch (type) {
         case 'code': {
             return (React__default['default'].createElement("pre", { className: "tcr-code-pre", style: style },
-                React__default['default'].createElement("code", null, data)));
+                React__default['default'].createElement("code", null, String(data))));
         }
         case 'date': {
             var isValid = dayjs_min(data, format).isValid();
@@ -78,7 +78,7 @@ function renderCell(type, data, style, config) {
                 : '-'));
         }
         case 'string': {
-            return data && String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
+            return String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
                     callback();
                 } }, data)) : (React__default['default'].createElement("span", { className: "tcr-colla-string", style: style }, data)))) : ('-');
         }

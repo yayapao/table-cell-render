@@ -19,7 +19,7 @@ export default function renderCell(
     case 'code': {
       return (
         <pre className="tcr-code-pre" style={style}>
-          <code>{data}</code>
+          <code>{String(data)}</code>
         </pre>
       )
     }
@@ -34,7 +34,7 @@ export default function renderCell(
       )
     }
     case 'string': {
-      return data && String(data).length > 0 ? (
+      return String(data).length > 0 ? (
         <Tooltip title={data} placement="topLeft">
           {callback ? (
             <Button
