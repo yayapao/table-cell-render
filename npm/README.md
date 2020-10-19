@@ -40,5 +40,7 @@ function App() {
 export default App
 ```
 
+We have supported more useful usages, you can check [docs: cell-render](https://github.com/Y-lonelY/table-cell-render) for more details!
+
 Thanks for using, solo with code🍁!
 
