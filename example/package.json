@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "antd": "^4.7.0",
     "cell-render": "file:../npm",
+    "dayjs": "^1.9.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
