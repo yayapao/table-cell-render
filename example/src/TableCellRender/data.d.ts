@@ -1,9 +1,11 @@
 export enum Types {
   code,
-  string
+  string,
+  date
 }
 
 export interface Config {
   callback?: (value?: any) => void
+  format?: string
 }
 

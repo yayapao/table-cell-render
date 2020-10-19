@@ -10,6 +10,7 @@ const data = [
   {
     key: '1',
     name: 'John Brown',
+    date: '2020-10-15T15:58:50+08:00',
     age: 32,
     address: 'New York No. 1 Lake Park',
     remark: '',
@@ -18,6 +19,7 @@ const data = [
   {
     key: '2',
     name: '',
+    date: '2020-10-15T15:58:50+08:00',
     age: 42,
     address: 'London No. 1 Lake Park',
     remark:
@@ -42,6 +44,15 @@ function App() {
       dataIndex: 'age',
       width: 120,
       key: 'age',
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      width: 220,
+      key: 'date',
+      render: (value: any) => {
+        return renderCell('date', value)
+      }
     },
     {
       title: 'Address',

@@ -1,9 +1,12 @@
 import React, { CSSProperties } from 'react'
 import { Tooltip, Button } from 'antd'
+import dayjs from 'dayjs'
 import { Types, Config } from './data.d'
 import './style.css'
 
-const initConfig = {}
+const initConfig = {
+  format: 'YYYY-MM-DD HH:mm:ss',
+}
 
 export default function renderCell(
   type: keyof typeof Types = 'string',
@@ -11,13 +14,23 @@ export default function renderCell(
   style: CSSProperties = {},
   config: Config = {}
 ) {
-  const { callback } = Object.assign({}, initConfig, config)
+  const { callback, format } = Object.assign({}, initConfig, config)
   switch (type) {
     case 'code': {
       return (
         <pre className="tcr-code-pre" style={style}>
           <code>{data}</code>
         </pre>
+      )
+    }
+    case 'date': {
+      const isValid = dayjs(data, format).isValid()
+      return (
+        <span>
+          {isValid
+            ? dayjs(data).format(format)
+            : '-'}
+        </span>
       )
     }
     case 'string': {
