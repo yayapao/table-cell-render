@@ -60,13 +60,14 @@ styleInject(css_248z);
 var initConfig = {
     format: 'YYYY-MM-DD HH:mm:ss',
 };
+var Paragraph = antd.Typography.Paragraph;
 function renderCell(type, data, style, config) {
     if (type === void 0) { type = 'string'; }
     if (data === void 0) { data = 'TableCellRender'; }
     if (style === void 0) { style = {}; }
     if (config === void 0) { config = {}; }
     var _a, _b, _c, _d;
-    var _e = Object.assign({}, initConfig, config), callback = _e.callback, format = _e.format, color = _e.color;
+    var _e = Object.assign({}, initConfig, config), callback = _e.callback, format = _e.format, color = _e.color, copyable = _e.copyable;
     switch (type) {
         case 'status': {
             var cr = 'blue';
@@ -109,6 +110,9 @@ function renderCell(type, data, style, config) {
             return React__default['default'].createElement("span", null, isValid ? dayjs_min(data).format(format) : '-');
         }
         case 'string': {
+            if (copyable) {
+                return React__default['default'].createElement(Paragraph, { copyable: true, ellipsis: true }, data);
+            }
             return String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
                     callback();
                 } }, data)) : (React__default['default'].createElement("span", { className: "tcr-colla-string", style: style }, data)))) : ('-');

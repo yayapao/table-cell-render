@@ -2,9 +2,9 @@ import React from 'react'
 import { Table, Space, Button } from 'antd'
 import { colors, status,  data } from './statics'
 // develop
-import renderCell from './TableCellRender'
+// import renderCell from './TableCellRender'
 // local path
-// import renderCell from 'cell-render'
+import renderCell from 'cell-render'
 import './App.css'
 
 function App() {
