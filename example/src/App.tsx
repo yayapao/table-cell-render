@@ -2,9 +2,9 @@ import React from 'react'
 import { Table, Space, Button } from 'antd'
 import { colors, status,  data } from './statics'
 // develop
-import renderCell from './TableCellRender'
+// import renderCell from './TableCellRender'
 // local path
-// import renderCell from 'cell-render'
+import renderCell from 'cell-render'
 import './App.css'
 
 function App() {
@@ -103,6 +103,7 @@ function App() {
   ]
   return (
     <div className="App" style={{ padding: '50px' }}>
+      <p>current develop env: {process.env.REACT_APP_DENV}</p>
       <Table scroll={{ x: 1500}} columns={columns} dataSource={data} />
     </div>
   )

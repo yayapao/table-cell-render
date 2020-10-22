@@ -65,17 +65,48 @@ function renderCell(type, data, style, config) {
     if (data === void 0) { data = 'TableCellRender'; }
     if (style === void 0) { style = {}; }
     if (config === void 0) { config = {}; }
-    var _a = Object.assign({}, initConfig, config), callback = _a.callback, format = _a.format;
+    var _a, _b, _c, _d;
+    var _e = Object.assign({}, initConfig, config), callback = _e.callback, format = _e.format, color = _e.color;
     switch (type) {
+        case 'status': {
+            var cr = 'blue';
+            if (typeof color === 'string') {
+                cr = color;
+            }
+            else if (Array.isArray(color)) {
+                var current = color.find(function (item) {
+                    return item.value === data;
+                });
+                cr = (_b = (_a = current) === null || _a === void 0 ? void 0 : _a.color, (_b !== null && _b !== void 0 ? _b : 'blue'));
+            }
+            return React__default['default'].createElement(antd.Badge, { color: cr, text: (data !== null && data !== void 0 ? data : '-') });
+        }
+        case 'tags': {
+            var closeable = false;
+            var cr = 'blue';
+            if (callback) {
+                closeable = true;
+            }
+            if (typeof color === 'string') {
+                cr = color;
+            }
+            else if (Array.isArray(color)) {
+                var current = color.find(function (item) {
+                    return item.value === data;
+                });
+                cr = (_d = (_c = current) === null || _c === void 0 ? void 0 : _c.color, (_d !== null && _d !== void 0 ? _d : 'blue'));
+            }
+            return (React__default['default'].createElement(antd.Tag, { color: (cr !== null && cr !== void 0 ? cr : 'blue'), closable: closeable, onClose: function () {
+                    callback && callback();
+                } }, (data !== null && data !== void 0 ? data : '-')));
+        }
         case 'code': {
             return (React__default['default'].createElement("pre", { className: "tcr-code-pre", style: style },
                 React__default['default'].createElement("code", null, String(data))));
         }
         case 'date': {
             var isValid = dayjs_min(data, format).isValid();
-            return (React__default['default'].createElement("span", null, isValid
-                ? dayjs_min(data).format(format)
-                : '-'));
+            return React__default['default'].createElement("span", null, isValid ? dayjs_min(data).format(format) : '-');
         }
         case 'string': {
             return String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {

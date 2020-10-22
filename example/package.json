@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "antd": "^4.7.0",
     "cell-render": "file:../npm",
+    "cross-env": "^7.0.2",
     "dayjs": "^1.9.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -20,6 +21,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:module": "REACT_APP_DENV=module yarn start",
+    "start:file": "REACT_APP_DENV=file yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

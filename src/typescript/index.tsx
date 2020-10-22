@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { Tooltip, Button } from 'antd'
+import { Tooltip, Button, Tag, Badge } from 'antd'
 import dayjs from 'dayjs'
 import { Types, Config } from '../../index.d'
 import './style.css'
@@ -14,8 +14,46 @@ export default function renderCell(
   style: CSSProperties = {},
   config: Config = {}
 ) {
-  const { callback, format } = Object.assign({}, initConfig, config)
+  const { callback, format, color } = Object.assign({}, initConfig, config)
   switch (type) {
+    case 'status': {
+      let cr = 'blue'
+      if (typeof color === 'string') {
+        cr = color
+      } else if (Array.isArray(color)) {
+        const current = color.find((item) => {
+          return item.value === data
+        })
+        cr = current?.color ?? 'blue'
+      }
+      return <Badge color={cr} text={data ?? '-'} />
+    }
+    case 'tags': {
+      let closeable = false
+      let cr = 'blue'
+      if (callback) {
+        closeable = true
+      }
+      if (typeof color === 'string') {
+        cr = color
+      } else if (Array.isArray(color)) {
+        const current = color.find((item) => {
+          return item.value === data
+        })
+        cr = current?.color ?? 'blue'
+      }
+      return (
+        <Tag
+          color={cr ?? 'blue'}
+          closable={closeable}
+          onClose={() => {
+            callback && callback()
+          }}
+        >
+          {data ?? '-'}
+        </Tag>
+      )
+    }
     case 'code': {
       return (
         <pre className="tcr-code-pre" style={style}>
@@ -25,13 +63,7 @@ export default function renderCell(
     }
     case 'date': {
       const isValid = dayjs(data, format).isValid()
-      return (
-        <span>
-          {isValid
-            ? dayjs(data).format(format)
-            : '-'}
-        </span>
-      )
+      return <span>{isValid ? dayjs(data).format(format) : '-'}</span>
     }
     case 'string': {
       return String(data).length > 0 ? (
