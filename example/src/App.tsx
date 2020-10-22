@@ -2,9 +2,9 @@ import React from 'react'
 import { Table, Space, Button } from 'antd'
 import { colors, status,  data } from './statics'
 // develop
-// import renderCell from './TableCellRender'
+import renderCell from './TableCellRender'
 // local path
-import renderCell from 'cell-render'
+// import renderCell from 'cell-render'
 import './App.css'
 
 function App() {
@@ -26,6 +26,17 @@ function App() {
       render: (value: any) => {
         return renderCell('status', value, undefined, {
           color: status
+        })
+      }
+    },
+    {
+      title: 'copyString',
+      dataIndex: 'copyString',
+      width: 120,
+      key: 'copyString',
+      render: (value: any) => {
+        return renderCell('string', value, undefined, {
+          copyable: true
         })
       }
     },

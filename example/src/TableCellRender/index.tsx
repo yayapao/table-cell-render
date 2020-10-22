@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { Tooltip, Button, Tag, Badge } from 'antd'
+import { Tooltip, Button, Tag, Badge, Typography } from 'antd'
 import dayjs from 'dayjs'
 import { Types, Config } from './data.d'
 import './style.css'
@@ -8,13 +8,19 @@ const initConfig = {
   format: 'YYYY-MM-DD HH:mm:ss',
 }
 
+const { Paragraph } = Typography
+
 export default function renderCell(
   type: keyof typeof Types = 'string',
   data: any = 'TableCellRender',
   style: CSSProperties = {},
   config: Config = {}
 ) {
-  const { callback, format, color } = Object.assign({}, initConfig, config)
+  const { callback, format, color, copyable } = Object.assign(
+    {},
+    initConfig,
+    config
+  )
   switch (type) {
     case 'status': {
       let cr = 'blue'
@@ -66,6 +72,9 @@ export default function renderCell(
       return <span>{isValid ? dayjs(data).format(format) : '-'}</span>
     }
     case 'string': {
+      if (copyable) {
+        return <Paragraph copyable ellipsis>{data}</Paragraph>
+      }
       return String(data).length > 0 ? (
         <Tooltip title={data} placement="topLeft">
           {callback ? (
