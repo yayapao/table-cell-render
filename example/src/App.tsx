@@ -1,32 +1,11 @@
 import React from 'react'
 import { Table, Space, Button } from 'antd'
+import { colors, status,  data } from './statics'
 // develop
-// import renderCell from './TableCellRender'
+import renderCell from './TableCellRender'
 // local path
-import renderCell from 'cell-render'
+// import renderCell from 'cell-render'
 import './App.css'
-
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    date: '2020-10-15T15:58:50+08:00',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    remark: '',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: '',
-    date: '2020-10-15T15:58:50+08:00',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    remark:
-      'it creates a new name to refer to that type. Aliasing a primitive is not terribly useful,',
-    tags: ['loser'],
-  },
-]
 
 function App() {
   const columns = [
@@ -38,6 +17,28 @@ function App() {
       render: (value: any) => {
         return renderCell('string', value)
       },
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      width: 120,
+      key: 'status',
+      render: (value: any) => {
+        return renderCell('status', value, undefined, {
+          color: status
+        })
+      }
+    },
+    {
+      title: 'Tags',
+      dataIndex: 'tags',
+      width: 120,
+      key: 'tags',
+      render: (value: any) => {
+        return renderCell('tags', value, undefined, {
+          color: colors
+        })
+      }
     },
     {
       title: 'Age',
@@ -80,12 +81,6 @@ function App() {
           }
         )
       },
-    },
-    {
-      title: 'Tags',
-      key: 'tags',
-      width: 1200,
-      dataIndex: 'tags',
     },
     {
       title: 'Action',
