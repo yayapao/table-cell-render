@@ -73,7 +73,7 @@ export default function renderCell(
     }
     case 'string': {
       if (copyable) {
-        return <Paragraph copyable ellipsis>{data}</Paragraph>
+        return <Paragraph style={{ marginBottom: 0 }} copyable ellipsis>{data}</Paragraph>
       }
       return String(data).length > 0 ? (
         <Tooltip title={data} placement="topLeft">
