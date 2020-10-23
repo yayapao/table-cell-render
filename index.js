@@ -111,7 +111,7 @@ function renderCell(type, data, style, config) {
         }
         case 'string': {
             if (copyable) {
-                return React__default['default'].createElement(Paragraph, { copyable: true, ellipsis: true }, data);
+                return React__default['default'].createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, data);
             }
             return String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
                     callback();

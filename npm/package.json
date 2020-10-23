@@ -1,6 +1,6 @@
 {
   "name": "cell-render",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "React table-cell-render tools based on antd!",
   "main": "index.js",
   "types": "index.d.ts",
