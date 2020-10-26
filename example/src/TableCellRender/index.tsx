@@ -6,6 +6,7 @@ import './style.css'
 
 const initConfig = {
   format: 'YYYY-MM-DD HH:mm:ss',
+  wrap: 'nowrap',
 }
 
 const { Paragraph } = Typography
@@ -16,7 +17,7 @@ export default function renderCell(
   style: CSSProperties = {},
   config: Config = {}
 ) {
-  const { callback, format, color, copyable } = Object.assign(
+  const { callback, format, color, copyable, wrap } = Object.assign(
     {},
     initConfig,
     config
@@ -62,9 +63,14 @@ export default function renderCell(
     }
     case 'code': {
       return (
-        <pre className="tcr-code-pre" style={style}>
-          <code>{String(data)}</code>
-        </pre>
+        <>
+          {wrap === 'nowrap' && (
+            <pre className="tcr-code-pre" style={style}>
+              <code>{String(data)}</code>
+            </pre>
+          )}
+          {wrap === 'wrap' && <code>{String(data)}</code>}
+        </>
       )
     }
     case 'date': {
@@ -73,7 +79,13 @@ export default function renderCell(
     }
     case 'string': {
       if (copyable) {
-        return <Paragraph style={{ marginBottom: 0 }} copyable ellipsis>{data}</Paragraph>
+        return (
+          <Tooltip title={data} placement="topLeft">
+            <Paragraph style={{ marginBottom: 0 }} copyable ellipsis>
+              {data}
+            </Paragraph>
+          </Tooltip>
+        )
       }
       return String(data).length > 0 ? (
         <Tooltip title={data} placement="topLeft">

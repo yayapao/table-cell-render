@@ -9,95 +9,95 @@ import './App.css'
 
 function App() {
   const columns = [
+    // {
+    //   title: 'Name',
+    //   dataIndex: 'name',
+    //   key: 'name',
+    //   width: 120,
+    //   render: (value: any) => {
+    //     return renderCell('string', value)
+    //   },
+    // },
+    // {
+    //   title: 'Status',
+    //   dataIndex: 'status',
+    //   width: 120,
+    //   key: 'status',
+    //   render: (value: any) => {
+    //     return renderCell('status', value, undefined, {
+    //       color: status
+    //     })
+    //   }
+    // },
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: 'wrapCode',
+      dataIndex: 'wrapCode',
       width: 120,
+      key: 'wrapCode',
       render: (value: any) => {
-        return renderCell('string', value)
-      },
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      width: 120,
-      key: 'status',
-      render: (value: any) => {
-        return renderCell('status', value, undefined, {
-          color: status
+        return renderCell('code', value, {}, {
+          wrap: 'wrap'
         })
       }
     },
-    {
-      title: 'copyString',
-      dataIndex: 'copyString',
-      width: 120,
-      key: 'copyString',
-      render: (value: any) => {
-        return renderCell('string', value, undefined, {
-          copyable: true
-        })
-      }
-    },
-    {
-      title: 'Tags',
-      dataIndex: 'tags',
-      width: 120,
-      key: 'tags',
-      render: (value: any) => {
-        return renderCell('tags', value, undefined, {
-          color: colors
-        })
-      }
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      width: 120,
-      key: 'age',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      width: 220,
-      key: 'date',
-      render: (value: any) => {
-        return renderCell('date', value)
-      }
-    },
+    // {
+    //   title: 'Tags',
+    //   dataIndex: 'tags',
+    //   width: 120,
+    //   key: 'tags',
+    //   render: (value: any) => {
+    //     return renderCell('tags', value, undefined, {
+    //       color: colors
+    //     })
+    //   }
+    // },
+    // {
+    //   title: 'Age',
+    //   dataIndex: 'age',
+    //   width: 120,
+    //   key: 'age',
+    // },
+    // {
+    //   title: 'Date',
+    //   dataIndex: 'date',
+    //   width: 220,
+    //   key: 'date',
+    //   render: (value: any) => {
+    //     return renderCell('date', value)
+    //   }
+    // },
     {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
-      width: 400,
+      width: 140,
       render: (value: any) => {
         return renderCell('code', value)
       },
     },
-    {
-      title: 'Remark',
-      key: 'remark',
-      dataIndex: 'remark',
-      width: 200,
-      render: (value: any) => {
-        return renderCell(
-          'string',
-          value,
-          {},
-          {
-            callback: () => {
-              console.log(value)
-            },
-          }
-        )
-      },
-    },
+    // {
+    //   title: 'Remark',
+    //   key: 'remark',
+    //   dataIndex: 'remark',
+    //   width: 200,
+    //   render: (value: any) => {
+    //     return renderCell(
+    //       'string',
+    //       value,
+    //       {},
+    //       {
+    //         callback: () => {
+    //           console.log(value)
+    //         },
+    //       }
+    //     )
+    //   },
+    // },
     {
       title: 'Action',
       key: 'action',
       fixed: 'right' as 'right',
-      width: 160,
+      width: 1200,
       render: (text: any, record: any) => {
         return (
           <Space>
