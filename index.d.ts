@@ -8,11 +8,17 @@ export enum Types {
   status
 }
 
+export enum WrapType {
+  wrap,
+  nowrap
+}
+
 export interface Config {
   callback?: (value?: any) => void
   format?: string
   color?: string | {value: any, color: string}[]
   copyable?: boolean
+  wrap?: keyof typeof WrapType
 }
 
 export interface RenderCellParams {
