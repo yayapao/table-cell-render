@@ -59,6 +59,7 @@ styleInject(css_248z);
 
 var initConfig = {
     format: 'YYYY-MM-DD HH:mm:ss',
+    wrap: 'nowrap',
 };
 var Paragraph = antd.Typography.Paragraph;
 function renderCell(type, data, style, config) {
@@ -67,7 +68,7 @@ function renderCell(type, data, style, config) {
     if (style === void 0) { style = {}; }
     if (config === void 0) { config = {}; }
     var _a, _b, _c, _d;
-    var _e = Object.assign({}, initConfig, config), callback = _e.callback, format = _e.format, color = _e.color, copyable = _e.copyable;
+    var _e = Object.assign({}, initConfig, config), callback = _e.callback, format = _e.format, color = _e.color, copyable = _e.copyable, wrap = _e.wrap;
     switch (type) {
         case 'status': {
             var cr = 'blue';
@@ -102,8 +103,10 @@ function renderCell(type, data, style, config) {
                 } }, (data !== null && data !== void 0 ? data : '-')));
         }
         case 'code': {
-            return (React__default['default'].createElement("pre", { className: "tcr-code-pre", style: style },
-                React__default['default'].createElement("code", null, String(data))));
+            return (React__default['default'].createElement(React__default['default'].Fragment, null,
+                wrap === 'nowrap' && (React__default['default'].createElement("pre", { className: "tcr-code-pre", style: style },
+                    React__default['default'].createElement("code", null, String(data)))),
+                wrap === 'wrap' && React__default['default'].createElement("code", null, String(data))));
         }
         case 'date': {
             var isValid = dayjs_min(data, format).isValid();
@@ -111,7 +114,8 @@ function renderCell(type, data, style, config) {
         }
         case 'string': {
             if (copyable) {
-                return React__default['default'].createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, data);
+                return (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" },
+                    React__default['default'].createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, data)));
             }
             return String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
                     callback();
