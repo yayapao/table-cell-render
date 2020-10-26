@@ -4,7 +4,7 @@
 version="1.0.0"
 app="cell-render"
 
-echo "hello"
+echo "hello cell-render"
 
 function build() {
   echo ">> The current version of $app is $version\n"

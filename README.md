@@ -11,7 +11,7 @@ This project is generated from [npm-template](https://github.com/Y-lonelY/npm-te
 
 `$ npm install table-cell-render --save` or `yarn add table-cell-render`
 
-## Usage
+## Quick Start
 
 Here's a quick demostration:
 
