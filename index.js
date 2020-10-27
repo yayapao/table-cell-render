@@ -65,40 +65,46 @@ function renderCell(type, data, style, config) {
     if (data === void 0) { data = 'TableCellRender'; }
     if (style === void 0) { style = {}; }
     if (config === void 0) { config = {}; }
-    var _a, _b, _c, _d;
-    var _e = Object.assign({}, initConfig, config), callback = _e.callback, format = _e.format, color = _e.color, copyable = _e.copyable, wrap = _e.wrap;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    var _l = Object.assign({}, initConfig, config), callback = _l.callback, format = _l.format, color = _l.color, copyable = _l.copyable, wrap = _l.wrap;
     switch (type) {
         case 'status': {
             var cr = 'blue';
+            var label = '-';
             if (typeof color === 'string') {
                 cr = color;
+                label = data;
             }
             else if (Array.isArray(color)) {
                 var current = color.find(function (item) {
                     return item.value === data;
                 });
                 cr = (_b = (_a = current) === null || _a === void 0 ? void 0 : _a.color, (_b !== null && _b !== void 0 ? _b : 'blue'));
+                label = (_d = (_c = current) === null || _c === void 0 ? void 0 : _c.label, (_d !== null && _d !== void 0 ? _d : (_e = current) === null || _e === void 0 ? void 0 : _e.value));
             }
-            return React.createElement(antd.Badge, { color: cr, text: (data !== null && data !== void 0 ? data : '-') });
+            return React.createElement(antd.Badge, { color: cr, text: label });
         }
         case 'tags': {
             var closeable = false;
             var cr = 'blue';
+            var label = '-';
             if (callback) {
                 closeable = true;
             }
             if (typeof color === 'string') {
                 cr = color;
+                label = 'data';
             }
             else if (Array.isArray(color)) {
                 var current = color.find(function (item) {
                     return item.value === data;
                 });
-                cr = (_d = (_c = current) === null || _c === void 0 ? void 0 : _c.color, (_d !== null && _d !== void 0 ? _d : 'blue'));
+                cr = (_g = (_f = current) === null || _f === void 0 ? void 0 : _f.color, (_g !== null && _g !== void 0 ? _g : 'blue'));
+                label = (_j = (_h = current) === null || _h === void 0 ? void 0 : _h.label, (_j !== null && _j !== void 0 ? _j : (_k = current) === null || _k === void 0 ? void 0 : _k.value));
             }
             return (React.createElement(antd.Tag, { color: (cr !== null && cr !== void 0 ? cr : 'blue'), closable: closeable, onClose: function () {
                     callback && callback();
-                } }, (data !== null && data !== void 0 ? data : '-')));
+                } }, label));
         }
         case 'code': {
             return (React.createElement(React.Fragment, null,
@@ -108,12 +114,15 @@ function renderCell(type, data, style, config) {
         }
         case 'date': {
             var isValid = dayjs_min(data, format).isValid();
-            return React.createElement("span", null, isValid ? dayjs_min(data).format(format) : '-');
+            if (!isValid) {
+                return '-';
+            }
+            return React.createElement("span", { style: style }, dayjs_min(data).format(format));
         }
         case 'string': {
             if (copyable) {
-                return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" },
-                    React.createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, data)));
+                return String(data).length > 0 ? (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" },
+                    React.createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, (data !== null && data !== void 0 ? data : '-')))) : ('-');
             }
             return String(data).length > 0 ? (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React.createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
                     callback();

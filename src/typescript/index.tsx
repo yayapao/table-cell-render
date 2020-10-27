@@ -25,29 +25,35 @@ export default function renderCell(
   switch (type) {
     case 'status': {
       let cr = 'blue'
+      let label = '-'
       if (typeof color === 'string') {
         cr = color
+        label = data
       } else if (Array.isArray(color)) {
         const current = color.find((item) => {
           return item.value === data
         })
         cr = current?.color ?? 'blue'
+        label = current?.label ?? current?.value
       }
-      return <Badge color={cr} text={data ?? '-'} />
+      return <Badge color={cr} text={label} />
     }
     case 'tags': {
       let closeable = false
       let cr = 'blue'
+      let label = '-'
       if (callback) {
         closeable = true
       }
       if (typeof color === 'string') {
         cr = color
+        label = 'data'
       } else if (Array.isArray(color)) {
         const current = color.find((item) => {
           return item.value === data
         })
         cr = current?.color ?? 'blue'
+        label = current?.label ?? current?.value
       }
       return (
         <Tag
@@ -57,7 +63,7 @@ export default function renderCell(
             callback && callback()
           }}
         >
-          {data ?? '-'}
+          {label}
         </Tag>
       )
     }
@@ -75,16 +81,21 @@ export default function renderCell(
     }
     case 'date': {
       const isValid = dayjs(data, format).isValid()
-      return <span>{isValid ? dayjs(data).format(format) : '-'}</span>
+      if (!isValid) {
+        return '-'
+      }
+      return <span style={style}>{dayjs(data).format(format)}</span>
     }
     case 'string': {
       if (copyable) {
-        return (
+        return String(data).length > 0 ? (
           <Tooltip title={data} placement="topLeft">
             <Paragraph style={{ marginBottom: 0 }} copyable ellipsis>
-              {data}
+              {data ?? '-'}
             </Paragraph>
           </Tooltip>
+        ) : (
+          '-'
         )
       }
       return String(data).length > 0 ? (
