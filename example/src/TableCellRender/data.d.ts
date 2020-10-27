@@ -3,20 +3,19 @@ export enum Types {
   string,
   date,
   tags,
-  status
+  status,
 }
 
 enum WrapType {
   wrap,
-  nowrap
+  nowrap,
 }
 
 export interface Config {
   callback?: (value?: any) => void
   format?: string
-  color?: string | {value: any, color: string}[]
+  color?: string | { value: any; color: string; label?: string }[]
   copyable?: boolean
   // control whether code should be break
   wrap?: keyof typeof WrapType
 }
-

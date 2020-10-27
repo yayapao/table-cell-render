@@ -12,11 +12,13 @@ export const colors = [
 export const status = [
   {
     value: 'online',
-    color: 'green',
+    color: '#52c41a',
+    label: '在线'
   },
   {
     value: 'offline',
-    color: 'red',
+    color: '#ff4d4f',
+    label: '离线'
   },
 ]
 

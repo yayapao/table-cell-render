@@ -19,27 +19,27 @@ function App() {
     //   },
     // },
     // {
-    //   title: 'Status',
+    //   title: 'Tags',
     //   dataIndex: 'status',
     //   width: 120,
     //   key: 'status',
     //   render: (value: any) => {
-    //     return renderCell('status', value, undefined, {
+    //     return renderCell('tags', value, undefined, {
     //       color: status
     //     })
     //   }
     // },
-    {
-      title: 'wrapCode',
-      dataIndex: 'wrapCode',
-      width: 120,
-      key: 'wrapCode',
-      render: (value: any) => {
-        return renderCell('code', value, {}, {
-          wrap: 'wrap'
-        })
-      }
-    },
+    // {
+    //   title: 'wrapCode',
+    //   dataIndex: 'wrapCode',
+    //   width: 120,
+    //   key: 'wrapCode',
+    //   render: (value: any) => {
+    //     return renderCell('code', value, {}, {
+    //       wrap: 'wrap'
+    //     })
+    //   }
+    // },
     // {
     //   title: 'Tags',
     //   dataIndex: 'tags',
@@ -57,24 +57,24 @@ function App() {
     //   width: 120,
     //   key: 'age',
     // },
-    // {
-    //   title: 'Date',
-    //   dataIndex: 'date',
-    //   width: 220,
-    //   key: 'date',
-    //   render: (value: any) => {
-    //     return renderCell('date', value)
-    //   }
-    // },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-      width: 140,
+      title: 'Date',
+      dataIndex: 'date',
+      width: 220,
+      key: 'date',
       render: (value: any) => {
-        return renderCell('code', value)
-      },
+        return renderCell('date', value)
+      }
     },
+    // {
+    //   title: 'Address',
+    //   dataIndex: 'address',
+    //   key: 'address',
+    //   width: 140,
+    //   render: (value: any) => {
+    //     return renderCell('code', value)
+    //   },
+    // },
     // {
     //   title: 'Remark',
     //   key: 'remark',
