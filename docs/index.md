@@ -53,7 +53,7 @@ const tpl = renderCell("string", value, {width: '20px'}, { callback: () => { con
 
 Look at this below:
 
-![string](/Users/yango/github/npm/table-cell-render/docs/statics/string.png)
+![string](https://github.com/Y-lonelY/table-cell-render/blob/master/docs/statics/string.png)
 
 1. `renderCell('string', value) ` normal render
 
@@ -69,7 +69,7 @@ String is **auto support ellipsis**, and it's controled by `copyable` and `callb
 
 Look at this below:
 
-![code](/Users/yango/github/npm/table-cell-render/docs/statics/code.png)
+![code](https://github.com/Y-lonelY/table-cell-render/blob/master/docs/statics/code.png)
 
 
 

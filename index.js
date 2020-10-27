@@ -1,11 +1,9 @@
 'use strict';
 
-var React = require('react');
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = _interopDefault(require('react'));
 var antd = require('antd');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -81,7 +79,7 @@ function renderCell(type, data, style, config) {
                 });
                 cr = (_b = (_a = current) === null || _a === void 0 ? void 0 : _a.color, (_b !== null && _b !== void 0 ? _b : 'blue'));
             }
-            return React__default['default'].createElement(antd.Badge, { color: cr, text: (data !== null && data !== void 0 ? data : '-') });
+            return React.createElement(antd.Badge, { color: cr, text: (data !== null && data !== void 0 ? data : '-') });
         }
         case 'tags': {
             var closeable = false;
@@ -98,28 +96,28 @@ function renderCell(type, data, style, config) {
                 });
                 cr = (_d = (_c = current) === null || _c === void 0 ? void 0 : _c.color, (_d !== null && _d !== void 0 ? _d : 'blue'));
             }
-            return (React__default['default'].createElement(antd.Tag, { color: (cr !== null && cr !== void 0 ? cr : 'blue'), closable: closeable, onClose: function () {
+            return (React.createElement(antd.Tag, { color: (cr !== null && cr !== void 0 ? cr : 'blue'), closable: closeable, onClose: function () {
                     callback && callback();
                 } }, (data !== null && data !== void 0 ? data : '-')));
         }
         case 'code': {
-            return (React__default['default'].createElement(React__default['default'].Fragment, null,
-                wrap === 'nowrap' && (React__default['default'].createElement("pre", { className: "tcr-code-pre", style: style },
-                    React__default['default'].createElement("code", null, String(data)))),
-                wrap === 'wrap' && React__default['default'].createElement("code", null, String(data))));
+            return (React.createElement(React.Fragment, null,
+                wrap === 'nowrap' && (React.createElement("pre", { className: "tcr-code-pre", style: style },
+                    React.createElement("code", null, String(data)))),
+                wrap === 'wrap' && React.createElement("code", null, String(data))));
         }
         case 'date': {
             var isValid = dayjs_min(data, format).isValid();
-            return React__default['default'].createElement("span", null, isValid ? dayjs_min(data).format(format) : '-');
+            return React.createElement("span", null, isValid ? dayjs_min(data).format(format) : '-');
         }
         case 'string': {
             if (copyable) {
-                return (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" },
-                    React__default['default'].createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, data)));
+                return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" },
+                    React.createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, data)));
             }
-            return String(data).length > 0 ? (React__default['default'].createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React__default['default'].createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
+            return String(data).length > 0 ? (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React.createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
                     callback();
-                } }, data)) : (React__default['default'].createElement("span", { className: "tcr-colla-string", style: style }, data)))) : ('-');
+                } }, data)) : (React.createElement("span", { className: "tcr-colla-string", style: style }, data)))) : ('-');
         }
     }
 }
