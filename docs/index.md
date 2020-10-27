@@ -57,7 +57,7 @@ const tpl = renderCell("string", value, {width: '20px'}, { callback: () => { con
 
 Look at this below:
 
-![string](https://github.com/Y-lonelY/table-cell-render/blob/master/docs/statics/string.png)
+![string](./statics/string.png)
 
 1. `renderCell('string', value) ` normal render
 
@@ -73,7 +73,7 @@ String is **auto support ellipsis**, and it's controled by `copyable` and `callb
 
 Look at this below:
 
-![code](https://github.com/Y-lonelY/table-cell-render/blob/master/docs/statics/code.png)
+![code](./statics/code.png)
 
 1. `renderCell('code', value)` return normal render content in single line(without wrapped)
 
@@ -85,7 +85,7 @@ Look at this below:
 
 Look at this below:
 
-![status](https://github.com/Y-lonelY/table-cell-render/blob/master/docs/statics/status.png)
+![status](./statics/status.png)
 
 You can easily use like this: `renderCell('status', value, {}, { color: '#ef613e' })`
 
@@ -112,6 +112,29 @@ render: (value: any) => {
 }
 ```
 
+About color, you can see [ant-badge](https://ant.design/components/badge-cn/) for some inspirations!
+
+
+
+### tags
+
+Look at this below:
+
+![tags](./statics/tags.png)
+
+In fact, `tags` is roughly the same with `status`, the main difference is the `color`, tags support status directions, like 'success', 'error' etc.
+
+
+
+### date
+
+Look at this below:
+
+![date](./statics/date.png)
+
+We use [dayJS](https://dayjs.gitee.io/) to parse the date(some reason for ending with the moment, sadly)，so you can do like this `renderCell('date', value, {}, { format: 'YYYY-MM-DD HH:mm:ss'})`
+
+And if the date is invalid, it will console the error and return '-'
 
 
 
