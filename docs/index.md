@@ -30,6 +30,8 @@ export default App
 
 Theoretically, you can use this pacakge whrenver you want to render literal content!
 
+
+
 ## API
 
 Here, here✨
@@ -48,6 +50,8 @@ const tpl = renderCell("string", value, {width: '20px'}, { callback: () => { con
 - `value`: target content to be rendered
 - `style`: define the element inner style
 - `config`: addon config to control the rendered template
+
+
 
 ### string
 
@@ -71,11 +75,46 @@ Look at this below:
 
 ![code](https://github.com/Y-lonelY/table-cell-render/blob/master/docs/statics/code.png)
 
-
-
 1. `renderCell('code', value)` return normal render content in single line(without wrapped)
 
 2. `renderCell('code', value, {}, { wrap: 'wrap' })` render the code in multi-lines
+
+
+
+### status
+
+Look at this below:
+
+![status](https://github.com/Y-lonelY/table-cell-render/blob/master/docs/statics/status.png)
+
+You can easily use like this: `renderCell('status', value, {}, { color: '#ef613e' })`
+
+or you can transfer a status list like this:
+
+```typescript
+export const status = [
+  {
+    value: 'online',
+    color: '#52c41a',
+    label: '在线'
+  },
+  {
+    value: 'offline',
+    color: '#ff4d4f',
+    label: '离线'
+  },
+]
+
+render: (value: any) => {
+  return renderCell('status', value, undefined, {
+    color: status
+  })
+}
+```
+
+
+
+
 
 
 
