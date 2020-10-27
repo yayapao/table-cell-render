@@ -46,34 +46,7 @@ export default App
 
 Here, here✨
 
-Cell-Render can greatly easy to render table cell(emmm, mostly used in the scene), but you can also use it to render something else.
-
-We can easily use it like this:
-
-```js
-const tpl = renderCell("string", value, {width: '20px'}, { callback: () => { console.log("hello") }})
-```
-
-`renderCell` can accept four params:
-- `type`: define which template to return
-- `value`: something to be rendered
-- `style`: define the element inner style
-- `config`
-
-### string
-
-Cell Render support auto handle strings in some ways!
-
-You can use like this: `const tpl = renderCell('string', value)` 
-
-- when the value is nullable(`null` or `undefined`), it will return `-`
-- if value.length is greater then the block's width, it will use `text-overflow: ellipisis;`
-
-And if you want to add some click events, the add `{ callback: () => {} }`, it will render with  `antd.Button` and `antd.Tooltip`
-
-### code
-
-
+see [api docs](https://y-lonely.github.io/table-cell-render/) for usage!
 
 
 ### Develop
