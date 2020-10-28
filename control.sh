@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # app version
-version="1.0.0"
+version="1.0.18"
 app="cell-render"
 
 echo "hello cell-render"

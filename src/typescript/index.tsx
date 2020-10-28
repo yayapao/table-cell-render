@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { Tooltip, Button, Tag, Badge, Typography } from 'antd'
+import { Tooltip, Button, Tag, Badge, Typography, Space } from 'antd'
 import dayjs from 'dayjs'
 import { Types, Config } from '../../index.d'
 import './style.css'
@@ -42,12 +42,19 @@ export default function renderCell(
       let closeable = false
       let cr = 'blue'
       let label = '-'
-      if (callback) {
-        closeable = true
-      }
+      if (callback) closeable = true
       if (typeof color === 'string') {
         cr = color
-        label = 'data'
+        label = data
+        if (Array.isArray(data) && data.length > 0) {
+          return (
+            <Space size={4}>
+              {data.map((item: any) => {
+                return <Tag color={cr}>{item}</Tag>
+              })}
+            </Space>
+          )
+        }
       } else if (Array.isArray(color)) {
         const current = color.find((item) => {
           return item.value === data

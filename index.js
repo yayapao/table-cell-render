@@ -86,23 +86,27 @@ function renderCell(type, data, style, config) {
         }
         case 'tags': {
             var closeable = false;
-            var cr = 'blue';
+            var cr_1 = 'blue';
             var label = '-';
-            if (callback) {
+            if (callback)
                 closeable = true;
-            }
             if (typeof color === 'string') {
-                cr = color;
-                label = 'data';
+                cr_1 = color;
+                label = data;
+                if (Array.isArray(data) && data.length > 0) {
+                    return (React.createElement(antd.Space, { size: 4 }, data.map(function (item) {
+                        return React.createElement(antd.Tag, { color: cr_1 }, item);
+                    })));
+                }
             }
             else if (Array.isArray(color)) {
                 var current = color.find(function (item) {
                     return item.value === data;
                 });
-                cr = (_g = (_f = current) === null || _f === void 0 ? void 0 : _f.color, (_g !== null && _g !== void 0 ? _g : 'blue'));
+                cr_1 = (_g = (_f = current) === null || _f === void 0 ? void 0 : _f.color, (_g !== null && _g !== void 0 ? _g : 'blue'));
                 label = (_j = (_h = current) === null || _h === void 0 ? void 0 : _h.label, (_j !== null && _j !== void 0 ? _j : (_k = current) === null || _k === void 0 ? void 0 : _k.value));
             }
-            return (React.createElement(antd.Tag, { color: (cr !== null && cr !== void 0 ? cr : 'blue'), closable: closeable, onClose: function () {
+            return (React.createElement(antd.Tag, { color: (cr_1 !== null && cr_1 !== void 0 ? cr_1 : 'blue'), closable: closeable, onClose: function () {
                     callback && callback();
                 } }, label));
         }
