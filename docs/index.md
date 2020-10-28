@@ -124,6 +124,11 @@ Look at this below:
 
 In fact, `tags` is roughly the same with `status`, the main difference is the `color`, tags support status directions, like 'success', 'error' etc.
 
+![tags](./statics/tags_array.png)
+
+Tags support the typeof data is **Array**, you can just do  `renderCell('tag', ['hello', 'world'], {}, { color: 'blue'})`
+
+
 
 
 ### date
