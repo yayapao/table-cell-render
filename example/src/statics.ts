@@ -26,7 +26,7 @@ export const data = [
   {
     key: '1',
     tags: 'nice',
-    status: 'online',
+    status: ['online', 'nice'],
     wrapCode: 'hello world',
     name: 'John Brown',
     date: '2020-10-15T15:58:50+08:00',
@@ -38,7 +38,7 @@ export const data = [
     key: '2',
     name: '',
     tags: 'not ok',
-    status: 'offline',
+    status: ['offline', 'bad'],
     wrapCode: 'this is able to copy',
     date: '2020-10-15T15:58:50+08:00',
     age: 42,

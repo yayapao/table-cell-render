@@ -18,17 +18,17 @@ function App() {
     //     return renderCell('string', value)
     //   },
     // },
-    // {
-    //   title: 'Tags',
-    //   dataIndex: 'status',
-    //   width: 120,
-    //   key: 'status',
-    //   render: (value: any) => {
-    //     return renderCell('tags', value, undefined, {
-    //       color: status
-    //     })
-    //   }
-    // },
+    {
+      title: 'Tags',
+      dataIndex: 'status',
+      width: 120,
+      key: 'status',
+      render: (value: any) => {
+        return renderCell('tags', value, undefined, {
+          color: 'blue'
+        })
+      }
+    },
     // {
     //   title: 'wrapCode',
     //   dataIndex: 'wrapCode',
@@ -57,15 +57,15 @@ function App() {
     //   width: 120,
     //   key: 'age',
     // },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      width: 220,
-      key: 'date',
-      render: (value: any) => {
-        return renderCell('date', value)
-      }
-    },
+    // {
+    //   title: 'Date',
+    //   dataIndex: 'date',
+    //   width: 220,
+    //   key: 'date',
+    //   render: (value: any) => {
+    //     return renderCell('date', value)
+    //   }
+    // },
     // {
     //   title: 'Address',
     //   dataIndex: 'address',
