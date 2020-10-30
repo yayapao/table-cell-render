@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { Tooltip, Button, Tag, Badge, Typography, Space } from 'antd'
+import { Tooltip, Button, Tag, Badge, Typography, Space, Popover } from 'antd'
 import dayjs from 'dayjs'
 import { Types, Config } from '../../index.d'
 import './style.css'
@@ -17,12 +17,64 @@ export default function renderCell(
   style: CSSProperties = {},
   config: Config = {}
 ) {
-  const { callback, format, color, copyable, wrap } = Object.assign(
-    {},
-    initConfig,
-    config
-  )
+  const {
+    callback,
+    format,
+    color,
+    copyable,
+    wrap,
+    max,
+    key,
+    itemRender,
+  } = Object.assign({}, initConfig, config)
   switch (type) {
+    case 'list': {
+      if (Array.isArray(data) && data.length > 0) {
+        return !max || max === -1 || data.length <= max ? (
+          <>
+            {data.map((item, index) => {
+              return (
+                <p style={{ padding: '2px 0', ...style }} key={index}>
+                  {itemRender ? itemRender(item, index) : key ? item[key] : item}
+                </p>
+              )
+            })}
+          </>
+        ) : (
+          <span className="list-global">
+            {key ? data[0][key] : data[0]}
+            <Popover
+              placement="right"
+              trigger="hover"
+              overlayClassName="cell-popver"
+              content={data.map((item, index) => {
+                return (
+                  <p style={{ padding: '2px 0', ...style }} key={index}>
+                    {itemRender ? itemRender(item, index) : key ? item[key] : item}
+                  </p>
+                )
+              })}
+            >
+              <span
+                onClick={() => {
+                  callback && callback(data)
+                }}
+                style={{
+                  fontWeight: 'bold',
+                  color: '#1890ff',
+                  cursor: 'pointer',
+                  margin: '0 0 0 3px',
+                  ...style,
+                }}
+              >
+                等{data.length - 1}项
+              </span>
+            </Popover>
+          </span>
+        )
+      }
+      return '-'
+    }
     case 'status': {
       let cr = 'blue'
       let label = '-'
@@ -41,7 +93,7 @@ export default function renderCell(
     case 'tags': {
       let closeable = false
       let cr = 'blue'
-      let label = '-'
+      let label = undefined
       if (callback) closeable = true
       if (typeof color === 'string') {
         cr = color
@@ -49,8 +101,8 @@ export default function renderCell(
         if (Array.isArray(data) && data.length > 0) {
           return (
             <Space size={4}>
-              {data.map((item: any) => {
-                return <Tag color={cr}>{item}</Tag>
+              {data.map((item: any, index: number) => {
+                return <Tag color={cr} key={index}>{item}</Tag>
               })}
             </Space>
           )
@@ -70,7 +122,7 @@ export default function renderCell(
             callback && callback()
           }}
         >
-          {label}
+          {label ?? data}
         </Tag>
       )
     }

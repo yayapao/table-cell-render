@@ -12,6 +12,8 @@ This project is generated from [npm-template](https://github.com/Y-lonelY/npm-te
 
 ## Usage
 
+You can see [apis](https://y-lonely.github.io/table-cell-render/) for more details!
+
 Here's a quick demostration:
 
 ```tsx

@@ -5,7 +5,8 @@ export enum Types {
   string,
   date,
   tags,
-  status
+  status,
+  list
 }
 
 export enum WrapType {
@@ -19,6 +20,9 @@ export interface Config {
   color?: string | {value: any, color: string, label?: string }[]
   copyable?: boolean
   wrap?: keyof typeof WrapType
+  max?: number
+  key?: string
+  itemRender?: (value: any, index: number) => React.ReactNode
 }
 
 export interface RenderCellParams {

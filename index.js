@@ -5,6 +5,32 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = _interopDefault(require('react'));
 var antd = require('antd');
 
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn, basedir, module) {
@@ -52,7 +78,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "button.tcr-colla-button {\n  width: 100%;\n  padding: 0;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-break: keep-all;\n  user-select: none;\n  cursor: pointer;\n}\n\n.tcr-colla-string {\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-break: keep-all;\n  width: 100%;\n  cursor: default;\n}\n\n.tcr-code-pre {\n  margin-bottom: 0;\n}";
+var css_248z = "button.tcr-colla-button {\n  width: 100%;\n  padding: 0;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-break: keep-all;\n  user-select: none;\n  cursor: pointer;\n}\n\n.tcr-colla-string {\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  word-break: keep-all;\n  width: 100%;\n  cursor: default;\n}\n\n.tcr-code-pre {\n  margin-bottom: 0;\n}\n\n.cell-popver > .ant-popover-inner-content {\n  padding: 6px 12px;\n}\n\n.cell-popver > .ant-popover-inner-content > .inner-label {\n  font-size: 12px;\n  padding: 2px 0;\n}\n\n.list-global {\n  display: inline-block;\n  line-height: 16px;\n}\n";
 styleInject(css_248z);
 
 var initConfig = {
@@ -66,8 +92,26 @@ function renderCell(type, data, style, config) {
     if (style === void 0) { style = {}; }
     if (config === void 0) { config = {}; }
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-    var _l = Object.assign({}, initConfig, config), callback = _l.callback, format = _l.format, color = _l.color, copyable = _l.copyable, wrap = _l.wrap;
+    var _l = Object.assign({}, initConfig, config), callback = _l.callback, format = _l.format, color = _l.color, copyable = _l.copyable, wrap = _l.wrap, max = _l.max, key = _l.key, itemRender = _l.itemRender;
     switch (type) {
+        case 'list': {
+            if (Array.isArray(data) && data.length > 0) {
+                return !max || max === -1 || data.length <= max ? (React.createElement(React.Fragment, null, data.map(function (item, index) {
+                    return (React.createElement("p", { style: __assign({ padding: '2px 0' }, style), key: index }, itemRender ? itemRender(item, index) : key ? item[key] : item));
+                }))) : (React.createElement("span", { className: "list-global" },
+                    key ? data[0][key] : data[0],
+                    React.createElement(antd.Popover, { placement: "right", trigger: "hover", overlayClassName: "cell-popver", content: data.map(function (item, index) {
+                            return (React.createElement("p", { style: __assign({ padding: '2px 0' }, style), key: index }, itemRender ? itemRender(item, index) : key ? item[key] : item));
+                        }) },
+                        React.createElement("span", { onClick: function () {
+                                callback && callback(data);
+                            }, style: __assign({ fontWeight: 'bold', color: '#1890ff', cursor: 'pointer', margin: '0 0 0 3px' }, style) },
+                            "\u7B49",
+                            data.length - 1,
+                            "\u9879"))));
+            }
+            return '-';
+        }
         case 'status': {
             var cr = 'blue';
             var label = '-';
@@ -87,15 +131,15 @@ function renderCell(type, data, style, config) {
         case 'tags': {
             var closeable = false;
             var cr_1 = 'blue';
-            var label = '-';
+            var label = undefined;
             if (callback)
                 closeable = true;
             if (typeof color === 'string') {
                 cr_1 = color;
                 label = data;
                 if (Array.isArray(data) && data.length > 0) {
-                    return (React.createElement(antd.Space, { size: 4 }, data.map(function (item) {
-                        return React.createElement(antd.Tag, { color: cr_1 }, item);
+                    return (React.createElement(antd.Space, { size: 4 }, data.map(function (item, index) {
+                        return React.createElement(antd.Tag, { color: cr_1, key: index }, item);
                     })));
                 }
             }
@@ -108,7 +152,7 @@ function renderCell(type, data, style, config) {
             }
             return (React.createElement(antd.Tag, { color: (cr_1 !== null && cr_1 !== void 0 ? cr_1 : 'blue'), closable: closeable, onClose: function () {
                     callback && callback();
-                } }, label));
+                } }, (label !== null && label !== void 0 ? label : data)));
         }
         case 'code': {
             return (React.createElement(React.Fragment, null,

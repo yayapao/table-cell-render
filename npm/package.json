@@ -1,6 +1,6 @@
 {
   "name": "cell-render",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "React table-cell-render tools based on antd!",
   "main": "index.js",
   "types": "index.d.ts",
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/Y-lonelY/table-cell-render/issues"
   },
-  "homepage": "https://github.com/Y-lonelY/table-cell-render#readme",
+  "homepage": "https://y-lonely.github.io/table-cell-render/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Y-lonelY/table-cell-render.git"
