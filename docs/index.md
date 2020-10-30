@@ -53,6 +53,48 @@ const tpl = renderCell("string", value, {width: '20px'}, { callback: () => { con
 
 
 
+### list
+
+Look at this below:
+
+![list](./statics/list.gif)
+
+We design some config items to control the cell display
+
+```typescript
+render: (value: any) => {
+  return renderCell('list', value, undefined, {
+    max: 3,
+    callback: () => {
+      message.success(value.join("~"))
+    },
+    itemRender: (item: string, index: number) => {
+      return (
+        <>
+        {renderCell('tags', index)}
+          <b>{item}</b>
+        </>
+      )
+    },
+  })
+},
+```
+
+
+
+- `Config.max: number` used to define when to join the list
+  - `list.length > max`: aggrefate the list
+  - `list.length <= max`: display the list normally
+  - `max: -1`: display all list
+- `Config.key` can render the target value with `item[key]` rather then `item`, it's useful when you pass the `{}[]`
+- `itemRender(value: any, index: number )` is designed to render the each item
+- `callback(value: any)` used to catch the [join list length] click event
+- `style: {[index: string]: any}` used to change the render style as we mentioned
+
+
+
+
+
 ### string
 
 Look at this below:
@@ -140,8 +182,6 @@ Look at this below:
 We use [dayJS](https://dayjs.gitee.io/) to parse the date(some reason for ending with the moment, sadly)，so you can do like this `renderCell('date', value, {}, { format: 'YYYY-MM-DD HH:mm:ss'})`
 
 And if the date is invalid, it will console the error and return '-'
-
-
 
 
 
