@@ -4,6 +4,7 @@ export enum Types {
   date,
   tags,
   status,
+  list,
 }
 
 enum WrapType {
@@ -18,4 +19,8 @@ export interface Config {
   copyable?: boolean
   // control whether code should be break
   wrap?: keyof typeof WrapType
+  // control list target and display nums
+  max?: number
+  key?: string
+  itemRender?: (value: any, index: number) => React.ReactNode
 }

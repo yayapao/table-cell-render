@@ -1,6 +1,6 @@
 import React from 'react'
-import { Table, Space, Button } from 'antd'
-import { colors, status,  data } from './statics'
+import { Table, Space, Button, message } from 'antd'
+import { colors, status, data } from './statics'
 // develop
 import renderCell from './TableCellRender'
 // local path
@@ -18,16 +18,38 @@ function App() {
     //     return renderCell('string', value)
     //   },
     // },
+    // {
+    //   title: 'Tags',
+    //   dataIndex: 'status',
+    //   width: 120,
+    //   key: 'status',
+    //   render: (value: any) => {
+    //     return renderCell('tags', value, undefined, {
+    //       color: 'blue',
+    //     })
+    //   },
+    // },
     {
-      title: 'Tags',
-      dataIndex: 'status',
+      title: 'Person',
+      dataIndex: 'person',
       width: 120,
-      key: 'status',
+      key: 'person',
       render: (value: any) => {
-        return renderCell('tags', value, undefined, {
-          color: 'blue'
+        return renderCell('list', value, undefined, {
+          max: 3,
+          callback: () => {
+            message.success(value.join("~"))
+          },
+          itemRender: (item: string, index: number) => {
+            return (
+              <>
+                {renderCell('tags', index)}
+                <b>{item}</b>
+              </>
+            )
+          },
         })
-      }
+      },
     },
     // {
     //   title: 'wrapCode',
@@ -93,29 +115,29 @@ function App() {
     //     )
     //   },
     // },
-    {
-      title: 'Action',
-      key: 'action',
-      fixed: 'right' as 'right',
-      width: 1200,
-      render: (text: any, record: any) => {
-        return (
-          <Space>
-            <Button type="link" size="small">
-              add
-            </Button>
-            <Button type="link" size="small">
-              edit
-            </Button>
-          </Space>
-        )
-      },
-    },
+    // {
+    //   title: 'Action',
+    //   key: 'action',
+    //   fixed: 'right' as 'right',
+    //   width: 1200,
+    //   render: (text: any, record: any) => {
+    //     return (
+    //       <Space>
+    //         <Button type="link" size="small">
+    //           add
+    //         </Button>
+    //         <Button type="link" size="small">
+    //           edit
+    //         </Button>
+    //       </Space>
+    //     )
+    //   },
+    // },
   ]
   return (
     <div className="App" style={{ padding: '50px' }}>
       <p>current develop env: {process.env.REACT_APP_DENV}</p>
-      <Table scroll={{ x: 1500}} columns={columns} dataSource={data} />
+      <Table scroll={{ x: 1500 }} columns={columns} dataSource={data} />
     </div>
   )
 }

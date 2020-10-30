@@ -26,6 +26,7 @@ export const data = [
   {
     key: '1',
     tags: 'nice',
+    person: ["lucy", "papaya", "ylonely", "momoyo"],
     status: ['online', 'nice'],
     wrapCode: 'hello world',
     name: 'John Brown',
@@ -37,6 +38,7 @@ export const data = [
   {
     key: '2',
     name: '',
+    person: ["belly", "abbey", "abbot"],
     tags: 'not ok',
     status: ['offline', 'bad'],
     wrapCode: 'this is able to copy',

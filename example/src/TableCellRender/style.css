@@ -22,3 +22,17 @@
 .tcr-code-pre {
   margin-bottom: 0;
 }
+
+.cell-popver > .ant-popover-inner-content {
+  padding: 6px 12px;
+}
+
+.cell-popver > .ant-popover-inner-content > .inner-label {
+  font-size: 12px;
+  padding: 2px 0;
+}
+
+.list-global {
+  display: inline-block;
+  line-height: 16px;
+}
