@@ -12,7 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "antd": "^4.7.0",
     "babel-jest": "^26.6.1",
-    "cell-render": "file:../npm",
+    "cell-render": "^1.1.4",
     "cross-env": "^7.0.2",
     "dayjs": "^1.9.3",
     "ele-utility": "^1.1.0",

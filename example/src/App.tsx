@@ -2,9 +2,9 @@ import React from 'react'
 import { Table, Space, Button, message } from 'antd'
 import { colors, status, data } from './statics'
 // develop
-import renderCell from './TableCellRender'
+// import renderCell from './TableCellRender'
 // local path
-// import renderCell from 'cell-render'
+import renderCell from 'cell-render'
 import './App.css'
 
 function App() {
@@ -23,19 +23,19 @@ function App() {
         )
       },
     },
-    // {
-    //   title: 'Name',
-    //   dataIndex: 'name',
-    //   key: 'name',
-    //   width: 120,
-    //   render: (value: any) => {
-    //     return renderCell('string', value, {}, {
-    //       copyable: {
-    //         text: 'hello'
-    //       }
-    //     })
-    //   },
-    // },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      width: 120,
+      render: (value: any) => {
+        return renderCell('string', value, {}, {
+          copyable: {
+            text: 'hello'
+          }
+        })
+      },
+    },
     // {
     //   title: 'Tags',
     //   dataIndex: 'status',

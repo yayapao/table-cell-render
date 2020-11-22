@@ -3140,8 +3140,10 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-"cell-render@file:../npm":
-  version "1.1.2"
+cell-render@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/cell-render/-/cell-render-1.1.4.tgz#59b24459589e34d7dbf7ee1d63f2b03d0e46b41b"
+  integrity sha512-sTqKiUcG9Rl3ifzdu3ZXY/4Uok3CD4LlH0edWmwYX8+aFUFW/ng8EVk0MgG+xIAwXgBfnJqNBUzokg7+yZWZnQ==
   dependencies:
     "@types/react-dom" "^16.9.0"
     typescript "~3.7.2"
