@@ -9,13 +9,31 @@ import './App.css'
 
 function App() {
   const columns = [
+    {
+      title: 'Weight',
+      dataIndex: 'weight',
+      key: 'weight',
+      width: 120,
+      render: (value: any) => {
+        return renderCell(
+          'number',
+          value,
+          { color: '#1890ff' },
+          { splitLabel: '@' }
+        )
+      },
+    },
     // {
     //   title: 'Name',
     //   dataIndex: 'name',
     //   key: 'name',
     //   width: 120,
     //   render: (value: any) => {
-    //     return renderCell('string', value)
+    //     return renderCell('string', value, {}, {
+    //       copyable: {
+    //         text: 'hello'
+    //       }
+    //     })
     //   },
     // },
     // {
@@ -29,28 +47,28 @@ function App() {
     //     })
     //   },
     // },
-    {
-      title: 'Person',
-      dataIndex: 'person',
-      width: 120,
-      key: 'person',
-      render: (value: any) => {
-        return renderCell('list', value, undefined, {
-          max: 3,
-          callback: () => {
-            message.success(value.join("~"))
-          },
-          itemRender: (item: string, index: number) => {
-            return (
-              <>
-                {renderCell('tags', index)}
-                <b>{item}</b>
-              </>
-            )
-          },
-        })
-      },
-    },
+    // {
+    //   title: 'Person',
+    //   dataIndex: 'person',
+    //   width: 120,
+    //   key: 'person',
+    //   render: (value: any) => {
+    //     return renderCell('list', value, undefined, {
+    //       max: 3,
+    //       callback: () => {
+    //         message.success(value.join("~"))
+    //       },
+    //       itemRender: (item: string, index: number) => {
+    //         return (
+    //           <>
+    //             {renderCell('tags', index)}
+    //             <b>{item}</b>
+    //           </>
+    //         )
+    //       },
+    //     })
+    //   },
+    // },
     // {
     //   title: 'wrapCode',
     //   dataIndex: 'wrapCode',

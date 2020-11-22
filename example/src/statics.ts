@@ -31,6 +31,7 @@ export const data = [
     wrapCode: 'hello world',
     name: 'John Brown',
     date: '2020-10-15T15:58:50+08:00',
+    weight: 123456.785,
     age: 32,
     address: 'New York No. 1 Lake Park',
     remark: '',
@@ -43,6 +44,7 @@ export const data = [
     status: ['offline', 'bad'],
     wrapCode: 'this is able to copy',
     date: '2020-10-15T15:58:50+08:00',
+    weight: '34343',
     age: 42,
     address: 'London No. 1 Lake Park',
     remark:

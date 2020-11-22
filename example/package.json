@@ -15,6 +15,7 @@
     "cell-render": "file:../npm",
     "cross-env": "^7.0.2",
     "dayjs": "^1.9.3",
+    "ele-utility": "^1.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "4.0.0",

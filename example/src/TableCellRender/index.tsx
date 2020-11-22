@@ -1,5 +1,7 @@
 import React, { CSSProperties } from 'react'
-import { Tooltip, Button, Tag, Badge, Typography, Space, Popover } from 'antd'
+import { Tag, Badge, Space, Popover } from 'antd'
+import { thsplite } from 'ele-utility'
+import StringRender from './StringRender'
 import dayjs from 'dayjs'
 import { Types, Config } from './data.d'
 import './style.css'
@@ -8,8 +10,6 @@ const initConfig = {
   format: 'YYYY-MM-DD HH:mm:ss',
   wrap: 'nowrap',
 }
-
-const { Paragraph } = Typography
 
 export default function renderCell(
   type: keyof typeof Types = 'string',
@@ -25,8 +25,11 @@ export default function renderCell(
     wrap,
     max,
     key,
+    // for render number seperator
+    splitLabel,
     itemRender,
   } = Object.assign({}, initConfig, config)
+
   switch (type) {
     case 'list': {
       if (Array.isArray(data) && data.length > 0) {
@@ -35,7 +38,11 @@ export default function renderCell(
             {data.map((item, index) => {
               return (
                 <p style={{ padding: '2px 0', ...style }} key={index}>
-                  {itemRender ? itemRender(item, index) : key ? item[key] : item}
+                  {itemRender
+                    ? itemRender(item, index)
+                    : key
+                    ? item[key]
+                    : item}
                 </p>
               )
             })}
@@ -50,7 +57,11 @@ export default function renderCell(
               content={data.map((item, index) => {
                 return (
                   <p style={{ padding: '2px 0', ...style }} key={index}>
-                    {itemRender ? itemRender(item, index) : key ? item[key] : item}
+                    {itemRender
+                      ? itemRender(item, index)
+                      : key
+                      ? item[key]
+                      : item}
                   </p>
                 )
               })}
@@ -102,7 +113,11 @@ export default function renderCell(
           return (
             <Space size={4}>
               {data.map((item: any, index: number) => {
-                return <Tag color={cr} key={index}>{item}</Tag>
+                return (
+                  <Tag color={cr} key={index}>
+                    {item}
+                  </Tag>
+                )
               })}
             </Space>
           )
@@ -145,39 +160,31 @@ export default function renderCell(
       }
       return <span style={style}>{dayjs(data).format(format)}</span>
     }
-    case 'string': {
-      if (copyable) {
-        return String(data).length > 0 ? (
-          <Tooltip title={data} placement="topLeft">
-            <Paragraph style={{ marginBottom: 0 }} copyable ellipsis>
-              {data ?? '-'}
-            </Paragraph>
-          </Tooltip>
-        ) : (
-          '-'
-        )
+    case 'number': {
+      if (typeof data === 'string' || typeof data === 'number') {
+        const current = thsplite(data, splitLabel ?? ',')
+        return <span style={style}>{current}</span>
       }
-      return String(data).length > 0 ? (
-        <Tooltip title={data} placement="topLeft">
-          {callback ? (
-            <Button
-              className="tcr-colla-button"
-              style={style}
-              type="link"
-              onClick={() => {
-                callback()
-              }}
-            >
-              {data}
-            </Button>
-          ) : (
-            <span className="tcr-colla-string" style={style}>
-              {data}
-            </span>
-          )}
-        </Tooltip>
-      ) : (
-        '-'
+      return <span style={style}>{data ?? '-'}</span>
+    }
+    case 'string': {
+      let current = {
+        tooltips: false,
+        text: data,
+      }
+      if (typeof copyable !== 'boolean') {
+        current = {
+          ...current,
+          ...copyable,
+        }
+      }
+      return (
+        <StringRender
+          data={data}
+          copyable={current}
+          callback={callback}
+          style={style}
+        />
       )
     }
   }
