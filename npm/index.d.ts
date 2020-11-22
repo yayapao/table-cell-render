@@ -6,7 +6,8 @@ export enum Types {
   date,
   tags,
   status,
-  list
+  list,
+  number
 }
 
 export enum WrapType {
@@ -18,10 +19,11 @@ export interface Config {
   callback?: (value?: any) => void
   format?: string
   color?: string | {value: any, color: string, label?: string }[]
-  copyable?: boolean
+  copyable?: boolean | { tooltips?: boolean, text?: string}
   wrap?: keyof typeof WrapType
   max?: number
   key?: string
+  splitLabel?: string
   itemRender?: (value: any, index: number) => React.ReactNode
 }
 

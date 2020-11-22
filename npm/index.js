@@ -31,6 +31,45 @@ var __assign = function() {
     return __assign.apply(this, arguments);
 };
 
+var Paragraph = antd.Typography.Paragraph;
+var StringRender = function (props) {
+    var copyable = props.copyable, data = props.data, callback = props.callback, style = props.style;
+    if (!data || String(data).length <= 0) {
+        return React.createElement("span", null, "-");
+    }
+    // copyable here means whether to display~
+    if (copyable) {
+        return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" },
+            React.createElement(Paragraph, { style: { marginBottom: 0 }, copyable: copyable, ellipsis: true }, data)));
+    }
+    return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React.createElement(antd.Button, { className: "tcr-colla-button", style: __assign({ textAlign: 'left' }, style), type: "link", onClick: function () {
+            callback();
+        } }, data)) : (React.createElement("span", { className: "tcr-colla-string", style: style }, data))));
+};
+
+// copy content to clipboard
+
+function thsplite(number, seperator) {
+    if (seperator === void 0) { seperator = ','; }
+    var value = number;
+    if (typeof value === 'number') {
+        value = String(value);
+    }
+    // [0] origin value [1] +/- [2] int [3] .decimal [4] decimal value
+    var cells = value.match(/^(-?)(\d*)(\.(\d+))?$/);
+    if (!cells || value === '-') {
+        return value;
+    }
+    var negative = cells[1];
+    var int = cells[2] || '0';
+    var decimal = cells[4] || '';
+    int = int.replace(/\B(?=(\d{3})+(?!\d))/g, seperator);
+    if (decimal === '') {
+        return "" + negative + int;
+    }
+    return "" + negative + int + "." + decimal;
+}
+
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn, basedir, module) {
@@ -85,23 +124,32 @@ var initConfig = {
     format: 'YYYY-MM-DD HH:mm:ss',
     wrap: 'nowrap',
 };
-var Paragraph = antd.Typography.Paragraph;
 function renderCell(type, data, style, config) {
     if (type === void 0) { type = 'string'; }
     if (data === void 0) { data = 'TableCellRender'; }
     if (style === void 0) { style = {}; }
     if (config === void 0) { config = {}; }
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-    var _l = Object.assign({}, initConfig, config), callback = _l.callback, format = _l.format, color = _l.color, copyable = _l.copyable, wrap = _l.wrap, max = _l.max, key = _l.key, itemRender = _l.itemRender;
+    var _l = Object.assign({}, initConfig, config), callback = _l.callback, format = _l.format, color = _l.color, copyable = _l.copyable, wrap = _l.wrap, max = _l.max, key = _l.key, 
+    // for render number seperator
+    splitLabel = _l.splitLabel, itemRender = _l.itemRender;
     switch (type) {
         case 'list': {
             if (Array.isArray(data) && data.length > 0) {
                 return !max || max === -1 || data.length <= max ? (React.createElement(React.Fragment, null, data.map(function (item, index) {
-                    return (React.createElement("p", { style: __assign({ padding: '2px 0' }, style), key: index }, itemRender ? itemRender(item, index) : key ? item[key] : item));
+                    return (React.createElement("p", { style: __assign({ padding: '2px 0' }, style), key: index }, itemRender
+                        ? itemRender(item, index)
+                        : key
+                            ? item[key]
+                            : item));
                 }))) : (React.createElement("span", { className: "list-global" },
                     key ? data[0][key] : data[0],
                     React.createElement(antd.Popover, { placement: "right", trigger: "hover", overlayClassName: "cell-popver", content: data.map(function (item, index) {
-                            return (React.createElement("p", { style: __assign({ padding: '2px 0' }, style), key: index }, itemRender ? itemRender(item, index) : key ? item[key] : item));
+                            return (React.createElement("p", { style: __assign({ padding: '2px 0' }, style), key: index }, itemRender
+                                ? itemRender(item, index)
+                                : key
+                                    ? item[key]
+                                    : item));
                         }) },
                         React.createElement("span", { onClick: function () {
                                 callback && callback(data);
@@ -139,7 +187,7 @@ function renderCell(type, data, style, config) {
                 label = data;
                 if (Array.isArray(data) && data.length > 0) {
                     return (React.createElement(antd.Space, { size: 4 }, data.map(function (item, index) {
-                        return React.createElement(antd.Tag, { color: cr_1, key: index }, item);
+                        return (React.createElement(antd.Tag, { color: cr_1, key: index }, item));
                     })));
                 }
             }
@@ -167,14 +215,22 @@ function renderCell(type, data, style, config) {
             }
             return React.createElement("span", { style: style }, dayjs_min(data).format(format));
         }
-        case 'string': {
-            if (copyable) {
-                return String(data).length > 0 ? (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" },
-                    React.createElement(Paragraph, { style: { marginBottom: 0 }, copyable: true, ellipsis: true }, (data !== null && data !== void 0 ? data : '-')))) : ('-');
+        case 'number': {
+            if (typeof data === 'string' || typeof data === 'number') {
+                var current = thsplite(data, (splitLabel !== null && splitLabel !== void 0 ? splitLabel : ','));
+                return React.createElement("span", { style: style }, current);
             }
-            return String(data).length > 0 ? (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React.createElement(antd.Button, { className: "tcr-colla-button", style: style, type: "link", onClick: function () {
-                    callback();
-                } }, data)) : (React.createElement("span", { className: "tcr-colla-string", style: style }, data)))) : ('-');
+            return React.createElement("span", { style: style }, (data !== null && data !== void 0 ? data : '-'));
+        }
+        case 'string': {
+            var current = {
+                tooltips: false,
+                text: data,
+            };
+            if (typeof copyable !== 'boolean') {
+                current = __assign(__assign({}, current), copyable);
+            }
+            return (React.createElement(StringRender, { data: data, copyable: current, callback: callback, style: style }));
         }
     }
 }
