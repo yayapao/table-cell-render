@@ -64,10 +64,12 @@ We design some config items to control the cell display
 ```typescript
 render: (value: any) => {
   return renderCell('list', value, undefined, {
+    // the maxium to display in cell
     max: 3,
     callback: () => {
       message.success(value.join("~"))
     },
+    // render each item
     itemRender: (item: string, index: number) => {
       return (
         <>
@@ -86,9 +88,13 @@ render: (value: any) => {
   - `list.length > max`: aggrefate the list
   - `list.length <= max`: display the list normally
   - `max: -1`: display all list
-- `Config.key` can render the target value with `item[key]` rather then `item`, it's useful when you pass the `{}[]`
+
+- `Config.key` can render the target value with `item[key]` rather then `item`, it's useful when you pass the `{key: string, value: string}[]`
+
 - `itemRender(value: any, index: number )` is designed to render the each item
+
 - `callback(value: any)` used to catch the [join list length] click event
+
 - `style: {[index: string]: any}` used to change the render style as we mentioned
 
 
@@ -103,11 +109,43 @@ Look at this below:
 
 1. `renderCell('string', value) ` normal render
 
-2. `renderCell('string', value, {}, { copyable: true })` to make the value copyable
+2. `renderCell('string', value, {}, { copyable: boolean | { text: string, tooltips: boolean} })` to make the value copyable
 
 3. `renderCell('string', value, {}, { callback: () => {}})` to make the content has a callback event
 
 String is **auto support ellipsis**, and it's controled by `copyable` and `callback` 
+
+
+
+### number
+
+Look at this below:
+
+![number](./statics/number.png)
+
+Here is a quick demonstration:
+
+```tsx
+{
+  title: 'Weight',
+  dataIndex: 'weight',
+  key: 'weight',
+  width: 120,
+  render: (value: any) => {
+    return renderCell(
+      'number',
+      value,
+      { color: '#1890ff' },
+      { splitLabel: '@' }
+    )
+  },
+}
+```
+
+
+
+- `Config:{ splitLabel: string }` means to replace the splite separator, default is `,`
+- And no worry about decimal, I have handle it correctly, see [thsplite](https://y-lonely.github.io/ele-utility/) from more information!
 
 
 
