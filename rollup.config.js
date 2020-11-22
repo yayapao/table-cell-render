@@ -4,17 +4,22 @@ import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 
 const inputPath = {
-  js: 'src/index.js',
-  ts: 'src/typescript/index.tsx'
+  ts: 'src/index.tsx',
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   input: inputPath.ts,
   output: {
-    file: 'index.js',
+    file: 'npm/index.js',
     format: 'cjs',
-    exports: "auto"
+    exports: 'auto',
   },
-  plugins: [typescript(), resolve(), commonjs(), postcss()],
-  external: ["react", "react-dom", "antd"]
+  plugins: [
+    typescript(),
+    resolve(),
+    commonjs(),
+    postcss(),
+  ],
+  external: ['react', 'react-dom', 'antd'],
 }
