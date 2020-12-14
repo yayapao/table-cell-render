@@ -113,7 +113,10 @@ Look at this below:
 
 3. `renderCell('string', value, {}, { callback: () => {}})` to make the content has a callback event
 
-String is **auto support ellipsis**, and it's controled by `copyable` and `callback` 
+String is **auto support ellipsis**, and it's controled by `copyable` and `callback`
+
+**`copyable` has higher priority than `callback`**
+
 
 
 
