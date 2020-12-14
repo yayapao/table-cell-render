@@ -2,9 +2,9 @@ import React from 'react'
 import { Table, Space, Button, message } from 'antd'
 import { colors, status, data } from './statics'
 // develop
-// import renderCell from './TableCellRender'
+import renderCell from './TableCellRender'
 // local path
-import renderCell from 'cell-render'
+// import renderCell from 'cell-render'
 import './App.css'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       title: 'Weight',
       dataIndex: 'weight',
       key: 'weight',
-      width: 120,
+      width: 1200,
       render: (value: any) => {
         return renderCell(
           'number',
@@ -29,9 +29,12 @@ function App() {
       key: 'name',
       width: 120,
       render: (value: any) => {
-        return renderCell('string', value, {}, {
+        return renderCell('string', 'ddjdjdjjdjdjdjdjjdjdnenhhenne', {}, {
           copyable: {
             text: 'hello'
+          },
+          callback: () => {
+            console.log('hello')
           }
         })
       },
@@ -133,24 +136,24 @@ function App() {
     //     )
     //   },
     // },
-    // {
-    //   title: 'Action',
-    //   key: 'action',
-    //   fixed: 'right' as 'right',
-    //   width: 1200,
-    //   render: (text: any, record: any) => {
-    //     return (
-    //       <Space>
-    //         <Button type="link" size="small">
-    //           add
-    //         </Button>
-    //         <Button type="link" size="small">
-    //           edit
-    //         </Button>
-    //       </Space>
-    //     )
-    //   },
-    // },
+    {
+      title: 'Action',
+      key: 'action',
+      fixed: 'right' as 'right',
+      width: 180,
+      render: (text: any, record: any) => {
+        return (
+          <Space>
+            <Button type="link" size="small">
+              add
+            </Button>
+            <Button type="link" size="small">
+              edit
+            </Button>
+          </Space>
+        )
+      },
+    },
   ]
   return (
     <div className="App" style={{ padding: '50px' }}>

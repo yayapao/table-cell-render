@@ -3,7 +3,7 @@ import { Tooltip, Button, Typography } from 'antd'
 
 interface StringProps {
   data: any
-  copyable?: boolean | { tooltips?: boolean; text?: boolean }
+  copyable?: boolean | { tooltips?: boolean; text?: string }
   callback?: (value?: any) => void
   style: CSSProperties
 }
@@ -21,7 +21,11 @@ const StringRender: React.FC<StringProps> = (props) => {
   if (copyable) {
     return (
       <Tooltip title={data} placement="topLeft">
-        <Paragraph style={{ marginBottom: 0 }} copyable={copyable as any} ellipsis>
+        <Paragraph
+          style={{ marginBottom: 0 }}
+          copyable={copyable as any}
+          ellipsis
+        >
           {data}
         </Paragraph>
       </Tooltip>
@@ -31,16 +35,16 @@ const StringRender: React.FC<StringProps> = (props) => {
   return (
     <Tooltip title={data} placement="topLeft">
       {callback ? (
-        <Button
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <a
           className="tcr-colla-button"
           style={{ textAlign: 'left', ...style }}
-          type="link"
           onClick={() => {
             callback()
           }}
         >
           {data}
-        </Button>
+        </a>
       ) : (
         <span className="tcr-colla-string" style={style}>
           {data}

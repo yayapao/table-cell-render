@@ -172,6 +172,8 @@ export default function renderCell(
         tooltips: false,
         text: data,
       }
+      const judges = ["boolean", "undefined"]
+      const isBool = judges.includes(typeof copyable)
       if (typeof copyable !== 'boolean') {
         current = {
           ...current,
@@ -181,7 +183,7 @@ export default function renderCell(
       return (
         <StringRender
           data={data}
-          copyable={current}
+          copyable={isBool ? copyable : current}
           callback={callback}
           style={style}
         />
