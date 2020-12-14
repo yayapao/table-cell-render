@@ -42,7 +42,9 @@ var StringRender = function (props) {
         return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" },
             React.createElement(Paragraph, { style: { marginBottom: 0 }, copyable: copyable, ellipsis: true }, data)));
     }
-    return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (React.createElement(antd.Button, { className: "tcr-colla-button", style: __assign({ textAlign: 'left' }, style), type: "link", onClick: function () {
+    return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+    React.createElement("a", { className: "tcr-colla-button", style: __assign({ textAlign: 'left' }, style), onClick: function () {
             callback();
         } }, data)) : (React.createElement("span", { className: "tcr-colla-string", style: style }, data))));
 };
@@ -227,10 +229,12 @@ function renderCell(type, data, style, config) {
                 tooltips: false,
                 text: data,
             };
+            var judges = ["boolean", "undefined"];
+            var isBool = judges.includes(typeof copyable);
             if (typeof copyable !== 'boolean') {
                 current = __assign(__assign({}, current), copyable);
             }
-            return (React.createElement(StringRender, { data: data, copyable: current, callback: callback, style: style }));
+            return (React.createElement(StringRender, { data: data, copyable: isBool ? copyable : current, callback: callback, style: style }));
         }
     }
 }
