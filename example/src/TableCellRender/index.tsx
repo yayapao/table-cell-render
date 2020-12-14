@@ -18,7 +18,7 @@ export default function renderCell(
   config: Config = {}
 ) {
   const {
-    callback,
+    tooltip,
     format,
     color,
     copyable,
@@ -27,6 +27,7 @@ export default function renderCell(
     key,
     // for render number seperator
     splitLabel,
+    callback,
     itemRender,
   } = Object.assign({}, initConfig, config)
 
@@ -183,6 +184,7 @@ export default function renderCell(
       return (
         <StringRender
           data={data}
+          tooltip={tooltip}
           copyable={isBool ? copyable : current}
           callback={callback}
           style={style}

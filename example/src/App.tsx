@@ -29,10 +29,11 @@ function App() {
       key: 'name',
       width: 120,
       render: (value: any) => {
-        return renderCell('string', 'ddjdjdjjdjdjdjdjjdjdnenhhenne', {}, {
-          copyable: {
-            text: 'hello'
-          },
+        return renderCell('string', value, {}, {
+          // copyable: {
+          //   text: 'hello'
+          // },
+          tooltip: 'hello',
           callback: () => {
             console.log('hello')
           }
