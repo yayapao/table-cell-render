@@ -1,8 +1,9 @@
 import React, { CSSProperties } from 'react'
-import { Tooltip, Button, Typography } from 'antd'
+import { Tooltip, Typography } from 'antd'
 
 interface StringProps {
   data: any
+  tooltip?: string | React.ReactNode
   copyable?: boolean | { tooltips?: boolean; text?: string }
   callback?: (value?: any) => void
   style: CSSProperties
@@ -11,7 +12,8 @@ interface StringProps {
 const { Paragraph } = Typography
 
 const StringRender: React.FC<StringProps> = (props) => {
-  const { copyable, data, callback, style } = props
+  const { copyable, data, tooltip, callback, style } = props
+  const tlp = tooltip && tooltip !== '' ? tooltip : data
 
   if (!data || String(data).length <= 0) {
     return <span>-</span>
@@ -20,7 +22,7 @@ const StringRender: React.FC<StringProps> = (props) => {
   // copyable here means whether to display~
   if (copyable) {
     return (
-      <Tooltip title={data} placement="topLeft">
+      <Tooltip title={tlp} placement="topLeft">
         <Paragraph
           style={{ marginBottom: 0 }}
           copyable={copyable as any}
@@ -33,7 +35,7 @@ const StringRender: React.FC<StringProps> = (props) => {
   }
 
   return (
-    <Tooltip title={data} placement="topLeft">
+    <Tooltip title={tlp} placement="topLeft">
       {callback ? (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a

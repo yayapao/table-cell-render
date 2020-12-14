@@ -33,16 +33,17 @@ var __assign = function() {
 
 var Paragraph = antd.Typography.Paragraph;
 var StringRender = function (props) {
-    var copyable = props.copyable, data = props.data, callback = props.callback, style = props.style;
+    var copyable = props.copyable, data = props.data, tooltip = props.tooltip, callback = props.callback, style = props.style;
+    var tlp = tooltip && tooltip !== '' ? tooltip : data;
     if (!data || String(data).length <= 0) {
         return React.createElement("span", null, "-");
     }
     // copyable here means whether to display~
     if (copyable) {
-        return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" },
+        return (React.createElement(antd.Tooltip, { title: tlp, placement: "topLeft" },
             React.createElement(Paragraph, { style: { marginBottom: 0 }, copyable: copyable, ellipsis: true }, data)));
     }
-    return (React.createElement(antd.Tooltip, { title: data, placement: "topLeft" }, callback ? (
+    return (React.createElement(antd.Tooltip, { title: tlp, placement: "topLeft" }, callback ? (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
     React.createElement("a", { className: "tcr-colla-button", style: __assign({ textAlign: 'left' }, style), onClick: function () {
             callback();
@@ -132,9 +133,9 @@ function renderCell(type, data, style, config) {
     if (style === void 0) { style = {}; }
     if (config === void 0) { config = {}; }
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-    var _l = Object.assign({}, initConfig, config), callback = _l.callback, format = _l.format, color = _l.color, copyable = _l.copyable, wrap = _l.wrap, max = _l.max, key = _l.key, 
+    var _l = Object.assign({}, initConfig, config), tooltip = _l.tooltip, format = _l.format, color = _l.color, copyable = _l.copyable, wrap = _l.wrap, max = _l.max, key = _l.key, 
     // for render number seperator
-    splitLabel = _l.splitLabel, itemRender = _l.itemRender;
+    splitLabel = _l.splitLabel, callback = _l.callback, itemRender = _l.itemRender;
     switch (type) {
         case 'list': {
             if (Array.isArray(data) && data.length > 0) {
@@ -234,7 +235,7 @@ function renderCell(type, data, style, config) {
             if (typeof copyable !== 'boolean') {
                 current = __assign(__assign({}, current), copyable);
             }
-            return (React.createElement(StringRender, { data: data, copyable: isBool ? copyable : current, callback: callback, style: style }));
+            return (React.createElement(StringRender, { data: data, tooltip: tooltip, copyable: isBool ? copyable : current, callback: callback, style: style }));
         }
     }
 }

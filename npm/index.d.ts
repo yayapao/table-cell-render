@@ -17,6 +17,7 @@ export enum WrapType {
 
 export interface Config {
   callback?: (value?: any) => void
+  tooltip?: string | React.ReactNode
   format?: string
   color?: string | {value: any, color: string, label?: string }[]
   copyable?: boolean | { tooltips?: boolean, text?: string}
